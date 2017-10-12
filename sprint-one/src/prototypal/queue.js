@@ -30,8 +30,6 @@ var queueMethods = {
   }
 };
 
-var a = Queue(); 
-a.enqueue(1)
 
 
 
