@@ -2,22 +2,14 @@
 
 // Instantiate a new graph
 var Graph = function() {
-  this.storage = [];
-  
-  
+  this.storage = []; 
   
 };
-
-
-
 
 var TreeNode = function(value, edge) {
   this.value = value;
-  this.edge = [];
+  this.edges = [];
 };
-
-
-
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
@@ -39,7 +31,12 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   for (let i = 0; i < this.storage.length; i++) {
+    var context = this.storage[i].edges;
+    console.log(this.storage[i].edges);
     if (this.storage[i].value === node) {
+      for (var k = 0; k < this.storage[i].edges.length; i++) { 
+        this.removeEdge(node, this.storage[i].edges[i]);
+      }
       this.storage.splice(i, 1);
     }
   }
@@ -48,27 +45,68 @@ Graph.prototype.removeNode = function(node) {
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  
+  for (var i = 0; i < this.storage.length; i++) { 
+    if (this.storage[i].value === fromNode) { 
+      if (this.storage[i].edges.includes(toNode)) { 
+        return true;
+      } 
+    }
+  }
+  return false;
 
 };
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-
+  for (var i = 0; i < this.storage.length; i++) { 
+    if (this.storage[i].value === fromNode) { 
+      this.storage[i].edges.push(toNode);
+    } else if (this.storage[i].value === toNode) { 
+      this.storage[i].edges.push(fromNode);
+    }
+  }
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+  for (var i = 0; i < this.storage.length; i++) { 
+    
+    if (this.storage[i].value === fromNode) { 
+      var removeIndex = this.storage[i].edges.indexOf(toNode);
+      // we will never forget the difference between splice and slice ;()
+      this.storage[i].edges.splice(removeIndex, 1);
+    } else if (this.storage[i].value === toNode) { 
+      var removeIndex = this.storage[i].edges.indexOf(fromNode);
+      this.storage[i].edges.splice(removeIndex, 1);
+    }
+  }
+   
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  
+  
+   
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+ 
+var graph = new Graph();
+graph.addNode(2);
+graph.addNode(1);
+graph.addNode(3);
+graph.addEdge(3, 2);
+var check = graph.hasEdge(3, 1);
+// graph.removeEdge(3, 2);
+graph.removeNode(2)
+console.log(graph.storage);
 
-var myGraph = new Graph();
+
+
+
+
 
 
