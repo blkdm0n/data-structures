@@ -25,14 +25,13 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  var root = this;
-  console.log(root);
+  // var root = this;
+  // console.log(this);
   var traverser = function(node) {
     if (node.value === target) {
-      return true; 
-      
+      console.log(node.value);
+      return true;  
     } else {
-      
       node.children.forEach(function(subTree) {
         traverser(subTree);
       });
@@ -40,16 +39,15 @@ treeMethods.contains = function(target) {
       return false; 
     }
   };
-  return traverser(root);
-  // return false;
+  return traverser(this);
 };
 
-// var example = Tree(1);
-// example.addChild(2);
-// example.addChild(3);
-// example.addChild(4);
-// example.children[0].addChild(5);
-// console.log(example.contains(55))
+var example = Tree(1);
+example.addChild(2);
+example.addChild(3);
+example.addChild(4);
+example.children[0].addChild(5);
+console.log(example.contains(5))
 
 
 
