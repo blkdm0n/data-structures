@@ -20,6 +20,7 @@ var LimitedArray = function(limit) {
     return storage[index];
   };
   limitedArray.set = function(index, value) {
+    
     checkLimit(index);
     storage[index] = value;
   };
@@ -37,7 +38,7 @@ var LimitedArray = function(limit) {
       throw new Error('Error trying to access an over-the-limit index');
     }
   };
-
+  console.log(storage);
   return limitedArray;
 };
 
@@ -53,6 +54,10 @@ var getIndexBelowMaxForKey = function(str, max) {
   }
   return hash % max;
 };
+var arr = LimitedArray(10); 
+arr.set(1, '21');
+// console.log(arr.get(1))
+console.log(arr)
 
 /*
  * Complexity: What is the time complexity of the above functions?

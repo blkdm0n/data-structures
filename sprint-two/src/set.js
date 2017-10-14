@@ -13,23 +13,27 @@ setPrototype.add = function(item) {
 };
 
 setPrototype.contains = function(item) {
-  if (!this._storage.includes(item)){ 
+  if (this._storage.includes(item)) { 
     return true;
   }
   return false;
 };
 
 setPrototype.remove = function(item) {
+  if (this.contains(item)){ 
+    this._storage.splice((this._storage.indexOf(item)),1);
+  }
   
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-var set = Set()
+var set = Set();
 
 set.add('Susan Sarandon');
 set.add('Danny Glover');
-console.log(set.contains('Danny Glover'))
-console.log(set)
+set.remove('Susan Sarandon')
+console.log(set.contains('Susan Sarandon'));
+
 
