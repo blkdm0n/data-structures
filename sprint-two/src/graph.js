@@ -30,17 +30,16 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-  for (let i = 0; i < this.storage.length; i++) {
-    var context = this.storage[i].edges;
-    console.log(this.storage[i].edges);
-    if (this.storage[i].value === node) {
-      for (var k = 0; k < this.storage[i].edges.length; i++) { 
-        this.removeEdge(node, this.storage[i].edges[i]);
+
+  for (var i = 0; i < this.storage.length; i++) { 
+    if (this.storage[i].value === node) { 
+      for (var k = 0; k < this.storage[i].edges.length; k++) { 
+        this.removeEdge(node, this.storage[i].edges[k]);
       }
       this.storage.splice(i, 1);
+      
     }
-  }
-  
+  }  
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -85,9 +84,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-  
-  
-   
+  for (var i = 0; i < this.storage.length; i++) {
+    cb(this.storage[i].value);
+  }
 };
 
 /*
@@ -95,15 +94,14 @@ Graph.prototype.forEachNode = function(cb) {
  */
  
 var graph = new Graph();
+var connectToFive = function(item) {
+  graph.addEdge(item, 5);
+};
+graph.addNode(5);
 graph.addNode(2);
 graph.addNode(1);
 graph.addNode(3);
-graph.addEdge(3, 2);
-var check = graph.hasEdge(3, 1);
-// graph.removeEdge(3, 2);
-graph.removeNode(2)
-console.log(graph.storage);
-
+graph.forEachNode(connectToFive);
 
 
 
